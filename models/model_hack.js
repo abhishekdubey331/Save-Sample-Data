@@ -7,12 +7,13 @@ const Schema=mongoose.Schema;
 
 const WallpaperSchema=new Schema({
 
-        url: String,
-        downloads:String
+    id: String,
+    category:String,
+    hack:String
 
 });
 
 
-const Wallpaper =mongoose.model('inspiration_small',WallpaperSchema);
+const Wallpaper =mongoose.model('hack_new',WallpaperSchema);
 
 module.exports=Wallpaper;

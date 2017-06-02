@@ -1,31 +1,38 @@
+var new_hack = require('../models/model_hack');
+var connection = require('../connection');
+
+
 module.exports = {
     configure: function (app) {
 
         //All Routes for GET Requests Coming In--------------------------------------------------//
 
-        app.get('/small', function (req, res, next) {
+        app.post('/save_new',function (req,res) {
 
-            res.render('small');
+            var Hack = new new_hack();
+
+            Hack.category= req.body.category;
+
+            Hack.hack=req.body.hack;
+
+
+            Hack.save(function(err, saved) {
+                if(err) {
+                    res.send('error saving hack');
+                } else {
+                    res.send(saved);
+                }
+            });
 
         });
 
-        app.get('/large', function (req, res, next) {
 
-            res.render('large');
+        app.get('/get_hacks',function (req,res) {
 
+            new_hack.find({},{},function(err,docs) {
+                res.send(docs);
+            });
         });
-
-
-
-        app.post('/upload', upload.single('upl'), function (req, res) {
-            useroperations.updateImage(req, res);
-        });
-
-        app.post('/large_upload', upload.single('upl'), function (req, res) {
-            console.log(req.file);
-            useroperations.update_large_image(req, res);
-        });
-
 
 
     }
