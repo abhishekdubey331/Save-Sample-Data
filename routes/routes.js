@@ -27,9 +27,9 @@ module.exports = {
         });
 
 
-        app.get('/get_hacks',function (req,res) {
+        app.post('/get_hacks',function (req,res) {
 
-            new_hack.find({},{},function(err,docs) {
+            new_hack.find({_id: { $gt: req.body.number}},{},function(err,docs) {
                 res.send(docs);
             });
         });
